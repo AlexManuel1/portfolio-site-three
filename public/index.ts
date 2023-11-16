@@ -1,7 +1,7 @@
 import * as three from 'three';
 
 const scene = new three.Scene();
-const camera = new three.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const camera = new three.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
 
 const renderer = new three.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -46,17 +46,18 @@ const material = new three.MeshNormalMaterial()
 
 const count = 500;
 let meshes: three.Mesh<any>[] = [];
-for ( var i = 0; i < count; i ++ ) {
-    var mesh = new three.Mesh(geometry, material);
+for ( var z = -1000; z < 1000; z+=20 ) {
 
-	mesh.scale.set(0.5, 1, 0.5);
+    var mesh = new three.Mesh(geometry, material);
+	mesh.scale.set(4, 8, 4);
+    // initial individual transformation
+    mesh.position.set(Math.random()*1000 - 500, Math.random()*1000 - 500, z);
+    mesh.rotation.x += Math.PI * Math.random();
+    mesh.rotation.y += Math.PI * Math.random();
+
     scene.add(mesh);
     meshes.push(mesh);
 
-    // initial individual transformation
-    mesh.position.set(- 5 + Math.random() * 20, 20 * Math.random(), -5 + Math.random() * 20);
-    mesh.rotation.x += Math.PI * Math.random();
-    mesh.rotation.y += Math.PI * Math.random();
 
 }
 
@@ -65,9 +66,14 @@ camera.position.z = 5;
 function animate() {
 	requestAnimationFrame( animate );
 
-	for (let mesh of meshes) {
+	for (let i = 0; i < meshes.length; i++) {
+		let mesh = meshes[i];
 		mesh.rotation.x += 0.01;
 		mesh.rotation.y += 0.01; 
+		mesh.position.z += i/100;
+		if(mesh.position.z > 1000) { 
+			mesh.position.z -= 2000; 
+		}
 	}
 
 	renderer.render( scene, camera );
