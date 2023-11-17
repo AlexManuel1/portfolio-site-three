@@ -5,8 +5,8 @@ const camera = new three.PerspectiveCamera( 75, window.innerWidth / window.inner
 
 const renderer = new three.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
-
+//document.body.appendChild( renderer.domElement );
+const div = document.getElementsByClassName("graphic")[0].appendChild(renderer.domElement);
 // create just one triangle
 const front = Math.tan(Math.PI / 6)
 const back = Math.cos(Math.PI / 6)
@@ -42,11 +42,12 @@ const faces = [
     9, 1, 6, // bottom left
 ]
 const geometry = new three.PolyhedronGeometry(vertices, faces, 0.5, 0)
-const material = new three.MeshNormalMaterial()
+const material = new three.MeshNormalMaterial();
+
 
 const count = 500;
 let meshes: three.Mesh<any>[] = [];
-for ( var z = -1000; z < 1000; z+=20 ) {
+for ( var z = -1000; z < 1000; z+=10) {
 
     var mesh = new three.Mesh(geometry, material);
 	mesh.scale.set(4, 8, 4);
@@ -70,7 +71,7 @@ function animate() {
 		let mesh = meshes[i];
 		mesh.rotation.x += 0.01;
 		mesh.rotation.y += 0.01; 
-		mesh.position.z += i/100;
+		mesh.position.z += i/200;
 		if(mesh.position.z > 1000) { 
 			mesh.position.z -= 2000; 
 		}

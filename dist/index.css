@@ -1,0 +1,35 @@
+.graphic {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+body {
+    height: 10000px;
+    margin: 0;
+    color: white;
+    background-color: black;
+    font-family: 'General Sans', sans-serif;
+}
+
+.portfolio-header {
+    font-size: 4rem;
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#portfolio-subtitle {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 3.5rem;
+}
+
+.portfolio-content {
+    height: 100%;
+}
