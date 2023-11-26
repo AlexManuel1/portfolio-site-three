@@ -1,9 +1,13 @@
+
+/*
+ * three js renderer
+*/
 import * as three from 'three';
 
 const scene = new three.Scene();
 const camera = new three.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
 
-const renderer = new three.WebGLRenderer();
+const renderer = new three.WebGLRenderer({ alpha: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
 //document.body.appendChild( renderer.domElement );
 const div = document.getElementsByClassName("graphic")[0].appendChild(renderer.domElement);
@@ -52,7 +56,8 @@ for ( var z = -1000; z < 1000; z+=10) {
     var mesh = new three.Mesh(geometry, material);
 	mesh.scale.set(4, 8, 4);
     // initial individual transformation
-    mesh.position.set(Math.random()*1000 - 500, Math.random()*1000 - 500, z);
+    //mesh.position.set(Math.random()*1000 - 500, Math.random()*1000 - 500, z);
+    mesh.position.set(Math.random()*window.innerWidth - innerWidth/2, Math.random()*window.innerHeight - innerHeight/2, z);
     mesh.rotation.x += Math.PI * Math.random();
     mesh.rotation.y += Math.PI * Math.random();
 
@@ -81,3 +86,35 @@ function animate() {
 }
 
 animate();
+
+
+/*
+ *  DOM javascript
+*/
+
+function getOffset(element: Element) {
+    const rect = element.getBoundingClientRect();
+    return {
+        left: rect.left + window.scrollX,
+        top: rect.top + window.scrollY
+    };
+};
+
+const canvasElement = document.getElementsByClassName('graphic')[0];
+const firstContentContainer = document.getElementsByClassName('content-container')[0];
+
+window.onscroll = function() {
+    console.log(window.scrollY);
+    console.log("firstContentContainer", getOffset(firstContentContainer).top);
+    console.log(getOffset(canvasElement).top);
+
+    const opacityMinimum = 0.20;
+    if (window.scrollY > window.innerHeight) {
+        canvasElement.setAttribute("style", `opacity: ${opacityMinimum};`);
+    } else {
+        const opacity = (window.innerHeight - window.scrollY) / window.innerHeight + opacityMinimum;
+        console.log("opacity: ", opacity);
+        canvasElement.setAttribute("style", `opacity: ${opacity};`);
+    }
+
+}

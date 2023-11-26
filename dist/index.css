@@ -1,5 +1,11 @@
+:root {
+    --bg-color: #000000; 
+    --primary-color: #14213d;
+    --secondary-color: #fca311;
+}
+
 .graphic {
-    position: relative;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100vw;
@@ -8,10 +14,11 @@
 }
 
 body {
-    height: 10000px;
     margin: 0;
+    width: auto; 
+    height: auto;
     color: white;
-    background-color: black;
+    background-color: var(--bg-color);
     font-family: 'General Sans', sans-serif;
 }
 
@@ -30,6 +37,72 @@ body {
     font-size: 3.5rem;
 }
 
-.portfolio-content {
-    height: 100%;
+.content-container {
+    width: 70%;
+    margin: 5rem auto; 
+}
+
+.content-header {
+    font-size: 3.5rem;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.tech-icon-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tech-icon {
+    max-height: 3rem;
+    padding: 1.5rem;
+}
+
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.project-container {
+    display: flex;
+}
+
+.project {
+    display: flex;
+}
+
+.project-image {
+    position: relative;
+    max-width: 35rem; 
+    max-height: fit-content;
+    top: 25px;
+    left: 25px;
+    border-radius: 20px;
+}
+
+.project-content {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-radius: 25px; 
+    padding: 3rem 15px 3rem 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-title {
+    font-size: 2rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.project-description {
+    padding: 2rem 1rem;
+    line-height: 1.5rem;
+}
+
+.project-technology {
+    max-height: 1.5rem;
+    padding: 0.5rem; 
 }
